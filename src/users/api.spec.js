@@ -137,6 +137,20 @@ describe('Users API', () => {
         });
     });
 
+    it ('should return an error when introduce a repeated email', (done) => {
+      createStub.yields(new Error('test fail'), null);
+
+      request.post('/users')
+        .send(mockResult)
+        .expect('Content-Type', /json/)
+        .expect(500)
+        .end(function (err, res) {
+          expect(err).to.equal(null);
+          expect(res.body).to.have.property('error', 'Internal Server Error');
+          done();
+        });
+    });
+
   });
 
   describe('Fetch', () => {
