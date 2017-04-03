@@ -43,7 +43,7 @@ describe('Users API', () => {
     });
 
     it('should return an array of users', (done) => {
-      request.get('/users').expect('Content-Type', /json/).expect(200).end(function (err, res) {
+      request.get('/api/users').expect('Content-Type', /json/).expect(200).end(function (err, res) {
         expect(err).to.equal(null);
         expect(Array.isArray(res.body.data)).to.equal(true);
         expect(res.body.data).to.eql([mockResult]);
@@ -54,7 +54,7 @@ describe('Users API', () => {
     it('should return a standard error when it fails', (done) => {
       findStub.yields(new Error('test fail'), null);
 
-      request.get('/users').expect('Content-Type', /json/).expect(500).end(function (err, res) {
+      request.get('/api/users').expect('Content-Type', /json/).expect(500).end(function (err, res) {
         expect(err).to.equal(null);
         expect(res.body).to.have.property('error', 'Internal Server Error');
         done();
@@ -76,7 +76,7 @@ describe('Users API', () => {
         role: true
       });
 
-      request.post('/users')
+      request.post('/api/users')
         .send({
           first_name: 'test',
           last_name: 'name',
@@ -98,7 +98,7 @@ describe('Users API', () => {
     });
 
     it('should return a 400 if no payload submitted', (done) => {
-      request.post('/users')
+      request.post('/api/users')
         .expect('Content-Type', /json/)
         .expect(400)
         .end(function (err, res) {
@@ -109,7 +109,7 @@ describe('Users API', () => {
     });
 
     it('should return a 400 if payload is missing required parameters', (done) => {
-      request.post('/users')
+      request.post('/api/users')
         .send({})
         .expect('Content-Type', /json/)
         .expect(400)
@@ -123,7 +123,7 @@ describe('Users API', () => {
     it('should return a standard error when it fails', (done) => {
       createStub.yields(new Error('test fail'), null);
 
-      request.post('/users')
+      request.post('/api/users')
         .send({
           email: 'email@email.com',
           password: '123'
@@ -140,7 +140,7 @@ describe('Users API', () => {
     it ('should return an error when introduce a repeated email', (done) => {
       createStub.yields(new Error('test fail'), null);
 
-      request.post('/users')
+      request.post('/api/users')
         .send(mockResult)
         .expect('Content-Type', /json/)
         .expect(500)
@@ -160,7 +160,7 @@ describe('Users API', () => {
     });
 
     it('should retrieve a specific user', (done) => {
-      request.get(`/users/${mockResult._id}`)
+      request.get(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, res) {
@@ -177,7 +177,7 @@ describe('Users API', () => {
     it('should return a 404 if no specific user', (done) => {
       findOneStub.yields(null, null);
 
-      request.get(`/users/${mockResult._id}`)
+      request.get(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(404)
         .end(function (err, res) {
@@ -190,7 +190,7 @@ describe('Users API', () => {
     it('should return a standard error when it fails', (done) => {
       findOneStub.yields(new Error('test fail'), null);
 
-      request.get(`/users/${mockResult._id}`)
+      request.get(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(500)
         .end(function (err, res) {
@@ -208,7 +208,7 @@ describe('Users API', () => {
     it('should return a 200 and the updated document if successful', (done) => {
       updateStub.yields(null, mockResult);
 
-      request.put(`/users/${mockId}`)
+      request.put(`/api/users/${mockId}`)
         .send({
           name: 'test'
         })
@@ -226,7 +226,7 @@ describe('Users API', () => {
     });
 
     it('should return a 400 if no payload submitted', (done) => {
-      request.put(`/users/${mockResult._id}`)
+      request.put(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(400)
         .end(function (err, res) {
@@ -237,7 +237,7 @@ describe('Users API', () => {
     });
 
     it('should return a 400 if payload is missing required parameters', (done) => {
-      request.put(`/users/${mockResult._id}`)
+      request.put(`/api/users/${mockResult._id}`)
         .send({})
         .expect('Content-Type', /json/)
         .expect(400)
@@ -251,7 +251,7 @@ describe('Users API', () => {
     it('should return a standard error when it fails', (done) => {
       updateStub.yields(new Error('test fail'), null);
 
-      request.put(`/users/${mockResult._id}`)
+      request.put(`/api/users/${mockResult._id}`)
         .send({
           name: 'test'
         })
@@ -271,7 +271,7 @@ describe('Users API', () => {
     it('should return a 200 if user removed successfully', (done) => {
       removeStub.yields(null, mockResult);
 
-      request.del(`/users/${mockResult._id}`)
+      request.del(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err) {
@@ -283,7 +283,7 @@ describe('Users API', () => {
     it('should return a 404 if no specific user', (done) => {
       removeStub.yields(null, null);
 
-      request.del(`/users/${mockResult._id}`)
+      request.del(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(404)
         .end(function (err, res) {
@@ -296,7 +296,7 @@ describe('Users API', () => {
     it('should return a standard error when it fails', (done) => {
       removeStub.yields(new Error('test fail'), null);
 
-      request.del(`/users/${mockResult._id}`)
+      request.del(`/api/users/${mockResult._id}`)
         .expect('Content-Type', /json/)
         .expect(500)
         .end(function (err, res) {

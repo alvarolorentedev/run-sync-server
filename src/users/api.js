@@ -47,6 +47,27 @@ module.exports = {
       });
     });
   },
+  fetchUser: (request, response, next) => {
+    UserService.findOne({email: request.params.email} ,{
+      _id: 1,
+      email: 1,
+      created: 1,
+      updated: 1,
+      role: 1
+    }, (err, result) => {
+      if (err) {
+        return next(err);
+      }
+      if (!result) {
+        return response.status(404).json({
+          error: 'User not found.'
+        });
+      }
+      return response.status(200).json({
+        data: result
+      });
+    });
+  },
   update: (request, response, next) => {
     UserService.update({ _id: request.params.id }, request.body, (err, result) => {
       if (err) {

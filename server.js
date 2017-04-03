@@ -24,10 +24,10 @@ db.once('open', () => {
 mongoose.connect((`mongodb://${config.MONGO_HOST}/${config.MONGO_DB}`));
 
 // app.use('/accounts', require('./src/accounts/router'));
-app.use('/users', require('./src/users/router'));
+app.use('/api/users', require('./src/users/router'));
 // app.get('/status', require('./src/status'));
-// app.get('/', require('./src/home'));
-app.all('*', require('./src/missing'));
+app.get('/api/', require('./src/home/router'));
+app.all('/api/*', require('./src/missing'));
 
 app.use((err, req, res, next) => { //eslint-disable-line no-unused-vars
   logger.error(err);

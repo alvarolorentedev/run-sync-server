@@ -8,7 +8,7 @@ describe('Missing', () => {
   let response;
 
   before(done => {
-    request.get('/this-route-will-never-exist-hopefully')
+    request.get('/api/this-route-will-never-exist-hopefully')
       .expect('Content-Type', /json/)
       .expect(404)
       .end(function (err, res) {
