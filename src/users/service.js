@@ -1,4 +1,8 @@
 const User = require('./model');
+const jwt = require('jsonwebtoken');
+const moment = require('moment');
+const config = require('config');
+
 
 module.exports = {
     find: function(query, fields, callback) {
@@ -30,5 +34,27 @@ module.exports = {
     },
     remove: function(query, callback) {
         User.findOneAndRemove(query, callback);
+    },
+
+    createToken: function (email) {
+        var payload = {
+            sub: email,
+            exp: moment().add(1, 'day').unix()
+        };
+        return jwt.sign(payload, config.SECRET);
+    },
+
+    verifyAuth: function (token, callback) {
+        if (token) {
+            jwt.verify(token, config.SECRET, function (err, payload) {
+                if (err) {
+                    callback(err);
+                } else {
+                    callback(null);
+                }
+            });
+        } else {
+            callback(null);
+        }
     }
 };

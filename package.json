@@ -32,11 +32,14 @@
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
     "config": "^1.25.1",
+    "crypto": "0.0.3",
     "express": "^4.15.2",
     "helmet": "^3.5.0",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "mongoose": "^4.9.3",
+    "nodemailer": "^4.0.0",
     "pino": "^4.2.4",
     "validator": "^7.0.0"
   }

@@ -30,6 +30,7 @@ describe('Users API', () => {
     createStub = sandbox.stub(UserService, 'create');
     updateStub = sandbox.stub(UserService, 'update');
     removeStub = sandbox.stub(UserService, 'remove');
+    // loginStub = sandbox.stub(UserService, 'login');
   });
 
   afterEach(() => {
@@ -78,11 +79,9 @@ describe('Users API', () => {
 
       request.post('/api/users')
         .send({
-          first_name: 'test',
-          last_name: 'name',
           email: 'email@email.com',
           password: '123',
-          contact_number: '123'
+          role: false
         })
         .expect('Content-Type', /json/)
         .expect(201)
@@ -302,6 +301,29 @@ describe('Users API', () => {
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.property('error', 'Internal Server Error');
+          done();
+        });
+    });
+  });
+
+  xdescribe('Login', () => {
+
+    it ('should return a 200 if the user exist', (done) => {
+      createStub.yields(new Error('test fail'), null);
+
+      request.post('/api/users/login')
+        .send({
+          email: 'test@test.com',
+          password: '123',
+        })
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+          console.log('ERR: ' + JSON.stringify(err));
+          console.log('res: ' + JSON.stringify(res));
+          expect(err).to.equal(null)
+          expect(res.body).to.have.property('message');
+          expect(res.body).to.have.property('token');
           done();
         });
     });

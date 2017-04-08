@@ -15,6 +15,10 @@ router.route('/:id')
   .put(userValidation.update, api.update)
   .delete(api.remove);
 
+
+router.route('/login')
+	.post(api.login)
+
 router.route('/token')
   .post(api.generateToken);
 
