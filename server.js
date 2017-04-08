@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 // app.use('/accounts', require('./src/accounts/router'));
 app.use('/api/users', require('./src/users/router'));
-app.use('/api/auth', require('./src/auth/router'));
+app.use('/api/', require('./src/home/router'));
 // app.get('/status', require('./src/status'));
 app.all('/api/*', require('./src/missing'));
 

@@ -4,7 +4,7 @@ const logger = require('pino')({
   enabled: process.env.NODE_ENV !== 'test'
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3080;
 const numWorkers = require('os').cpus().length;
 
 // if (cluster.isMaster) {
