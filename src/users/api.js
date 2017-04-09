@@ -26,6 +26,7 @@ module.exports = {
           data: result,
           message: 'Welcome to run-sync, you are now logged in',
           token: UserService.createToken(result.email),
+          user: result.email
       });
     });
   },
@@ -116,7 +117,8 @@ module.exports = {
         }
         return response.status(200).json({
           message: 'You are now logged in', 
-          token: UserService.createToken(user.email)
+          token: UserService.createToken(user.email),
+          user: user.email
         });
       });
     });
