@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-const UserService = require('./service');
+const UserService = require('../../src/users/service');
 const app = require('../../server');
 const request = require('supertest')(app);
 

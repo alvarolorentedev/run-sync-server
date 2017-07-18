@@ -1,4 +1,4 @@
-const nikeplus = require('../../libraries/nike-unofficial-api');
+const nikeplus = require('nike-unofficial-api');
 
 module.exports = {
 

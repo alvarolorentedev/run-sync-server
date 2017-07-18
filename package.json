@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon index.js",
-    "test": "NODE_ENV=test mocha --require test/config.js --recursive src/**/*.spec.js",
+    "test": "NODE_ENV=test mocha --require test/config.js --recursive test/**/*.spec.js",
     "test:watch": "npm t -- -w"
   },
   "private": true,
@@ -39,6 +39,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "mongoose": "^4.9.3",
+    "nike-unofficial-api": "github:kanekotic/nike-unofficial-api",
     "nodemailer": "^4.0.0",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",
