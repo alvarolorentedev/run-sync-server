@@ -2,11 +2,10 @@
   "name": "run-sync-server",
   "version": "0.0.1",
   "description": "Server side for the run-sync project",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "NODE_ENV=development nodemon index.js",
-    "test": "NODE_ENV=test mocha --require test/config.js --recursive test/**/*.spec.js",
-    "test:watch": "npm t -- -w"
+    "start": " node .",
+    "start:dev": "NODE_ENV=development nodemon src/server.js"
   },
   "private": true,
   "repository": {
@@ -14,36 +13,22 @@
     "url": "ssh://git@github.com:aperezm85/run-sync-server.git"
   },
   "author": "Alex Perez <alex@run-sync.com>",
+  "contributors": [
+    {
+      "name": "Alvaro Perez",
+      "email": "alvaro@run-sync.com"
+    }
+  ],
   "license": "ISC",
-  "devDependencies": {
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-register": "^6.24.0",
-    "chai": "^3.5.0",
-    "eslint": "^3.19.0",
-    "husky": "^0.13.3",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
-    "nodemon": "^1.11.0",
-    "sinon": "^2.1.0",
-    "supertest": "^3.0.0"
-  },
   "dependencies": {
-    "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
-    "config": "^1.25.1",
-    "crypto": "0.0.3",
     "express": "^4.15.2",
     "helmet": "^3.5.0",
-    "jsonwebtoken": "^7.3.0",
-    "lodash": "^4.17.4",
-    "moment": "^2.18.1",
-    "mongoose": "^4.9.3",
     "nike-unofficial-api": "github:kanekotic/nike-unofficial-api",
-    "nodemailer": "^4.0.0",
-    "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1",
-    "pino": "^4.2.4",
-    "validator": "^7.0.0"
+    "pino": "^4.2.4"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "nodemon": "^1.11.0"
   }
 }
