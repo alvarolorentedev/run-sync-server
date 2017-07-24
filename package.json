@@ -5,7 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "start": " node .",
-    "start:dev": "NODE_ENV=development nodemon src/server.js"
+    "start:dev": "NODE_ENV=development nodemon src/server.js",
+    "test": "jest",
+    "test:dev": "jest --watchAll"
   },
   "private": true,
   "repository": {
@@ -20,6 +22,9 @@
     }
   ],
   "license": "ISC",
+  "jest": {
+    "testMatch": [ "**/test/**/*-test.js" ]
+  },
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
