@@ -23,7 +23,11 @@
   ],
   "license": "ISC",
   "jest": {
-    "testMatch": [ "**/test/**/*-test.js" ]
+    "testMatch": [
+      "**/test/**/*-test.js"
+    ],
+    "testEnvironment": "node",
+    "automock": false
   },
   "dependencies": {
     "body-parser": "^1.17.1",
@@ -34,6 +38,7 @@
   },
   "devDependencies": {
     "jest": "^20.0.4",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   }
 }
