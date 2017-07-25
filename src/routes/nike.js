@@ -1,8 +1,12 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router()
+const nike = require('nike-unofficial-api')
 
-router.get('/login', function(req, res) {
-    res.send('hola')
+router.post('/login', function(req, res) {
+    nike.authenticate({email:'pepe',password:'12345'}).then(
+        result => res.send(result)
+    ).catch(
+        err => res.sendStatus(400)
+    )
 })
 
 module.exports = router;
