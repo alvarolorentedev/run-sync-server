@@ -1,8 +1,9 @@
 jest.mock('nike-unofficial-api', () => ({
-  authenticate: jest.fn()
+  authenticate: jest.fn(),
+  workouts: jest.fn()
 }));
 
-const authenticate = require('nike-unofficial-api').authenticate
+const nike = require('nike-unofficial-api')
 
 const bodyParser = require('body-parser')
 const app = require('express')()
@@ -13,32 +14,72 @@ const request = require('supertest')(app)
 
 describe('Test the nike endpoit', () => {
     beforeEach(() => {
-        authenticate.mockReset()
-        authenticate.mockImplementation(() => { return Promise.resolve() })
+        nike.authenticate.mockReset()
+        nike.workouts.mockReset()
+        nike.authenticate.mockImplementation(() => { return Promise.resolve( { works: true } ) })
+        nike.workouts.mockImplementation(() => { return Promise.resolve( [ { works: true } ] ) })
     });
 
     test('nike login is called with correct parameters', () => {
-        
-        return request.post('/nike/login').send({email:'pepe',password:'12345'}).then(result => {
-            expect(authenticate.mock.calls.length).toBe(1)
-            expect(authenticate.mock.calls[0][0].email).toBe('pepe')
-            expect(authenticate.mock.calls[0][0].password).toBe('12345')
-            expect(result.statusCode).toBe(200)
+        var randomEmail = Math.random().toString(36).substr(0, 5)
+        var randomPassword = Math.random().toString(36).substr(0, 5)
+        return request.post('/nike/login').send({email: randomEmail, password:randomPassword}).then(result => {
+            expect(nike.authenticate.mock.calls.length).toBe(1)
+            expect(nike.authenticate.mock.calls[0][0].email).toBe(randomEmail)
+            expect(nike.authenticate.mock.calls[0][0].password).toBe(randomPassword)
         })
     });
 
-    test('nike login returns 200 if correct service response', () => {
-        return request.post('/nike/login').send({username:'pepe',password:'perez'}).then(result => {
-            expect(authenticate.mock.calls.length).toBe(1)
-            expect(result.statusCode).toBe(200)
-        })
-    });
-
-    test('nike login returns 400 if incorrect service response', () => {
-        authenticate.mockImplementation(() => { return Promise.reject() })
-        return request.post('/nike/login').send({username:'pepe',password:'perez'}).then(result => {
-            expect(authenticate.mock.calls.length).toBe(1)
+    test('nike login returns error if empty request', () => {
+        nike.authenticate.mockImplementation(() => { throw "exception" })
+        return request.post('/nike/login').send().then(result => {
             expect(result.statusCode).toBe(400)
         })
     });
+
+    test('nike login returns correct response if service resolves', () => {
+        return request.post('/nike/login').send({email:'pepe',password:'perez'}).then(result => {
+            expect(result.body).toEqual({ works: true })
+            expect(result.statusCode).toBe(200)
+        })
+    });
+
+    test('nike login returns error if incorrect service rejects', () => {
+        nike.authenticate.mockImplementation(() => { return Promise.reject() })
+        return request.post('/nike/login').send({email:'pepe',password:'perez'}).then(result => {
+            expect(nike.authenticate.mock.calls.length).toBe(1)
+            expect(result.statusCode).toBe(400)
+        })
+    });
+
+    test('nike get list of workouts with correct parameters', () => {
+        var randomToken = Math.random().toString(36).substr(0, 5)
+        return request.post('/nike/workouts').send({token: randomToken}).then(result => {
+            expect(nike.workouts.mock.calls.length).toBe(1)
+            expect(nike.workouts.mock.calls[0][0].token).toBe(randomToken)
+            expect(result.statusCode).toBe(200)
+        })
+    });
+
+    test('nike get list of workouts returns correct result', () => {
+        return request.post('/nike/workouts').send({token: 'pepe'}).then(result => {
+            expect(result.body).toEqual([ { works: true } ])
+            expect(result.statusCode).toBe(200)
+        })
+    });
+
+    test('nike get list of workouts returns error if empty request', () => {
+        return request.post('/nike/workouts').send().then(result => {
+            expect(result.statusCode).toBe(400)
+        })
+    });
+
+    test('nike get list of workouts returns error if incorrect service rejects', () => {
+        nike.workouts.mockImplementation(() => { return Promise.reject() })
+        return request.post('/nike/workouts').send({token: 'pepe'}).then(result => {
+            expect(nike.workouts.mock.calls.length).toBe(1)
+            expect(result.statusCode).toBe(400)
+        })
+    });
+
 })
