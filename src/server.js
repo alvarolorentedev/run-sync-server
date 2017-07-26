@@ -15,6 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use('/accounts', require('./src/accounts/router'));
+app.use('/nike', require('./routes/nike'));
+app.use('/endomondo', require('./routes/endomondo'));
 
 app.listen(port);
