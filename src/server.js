@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 
-const port = process.env.PORT || 3080
+const port = process.env.PORT || 8080
 const app = express()
 
 app.use(helmet())

@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": " node .",
-    "start:dev": "NODE_ENV=development nodemon src/server.js",
+    "start:dev": "NODE_ENV=development nodemon .",
+    "start:prod": "node src/cluster.js",
     "test": "jest",
     "test:dev": "jest --watchAll",
     "test:cov": "jest --coverage"
@@ -32,6 +33,7 @@
   },
   "dependencies": {
     "body-parser": "^1.17.1",
+    "cluster": "^0.7.7",
     "cors": "^2.8.4",
     "endomondo-unofficial-api": "^0.0.9",
     "express": "^4.15.2",
