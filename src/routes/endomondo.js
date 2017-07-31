@@ -11,7 +11,7 @@ router.post('/login', function(req, res) {
     )
 })
 
-router.post('/workouts', function(req, res) {
+router.get('/workouts', function(req, res) {
     if(!req.body.token)
         res.sendStatus(400)
     endomondo.workouts(req.body).then(

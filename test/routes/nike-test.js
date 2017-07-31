@@ -54,7 +54,7 @@ describe('Test the nike endpoit', () => {
 
     test('nike get list of workouts with correct parameters', () => {
         var randomToken = Math.random().toString(36).substr(0, 5)
-        return request.post('/nike/workouts').send({token: randomToken}).then(result => {
+        return request.get('/nike/workouts').send({token: randomToken}).then(result => {
             expect(nike.workouts.mock.calls.length).toBe(1)
             expect(nike.workouts.mock.calls[0][0].token).toBe(randomToken)
             expect(result.statusCode).toBe(200)
@@ -62,21 +62,21 @@ describe('Test the nike endpoit', () => {
     })
 
     test('nike get list of workouts returns correct result', () => {
-        return request.post('/nike/workouts').send({token: 'pepe'}).then(result => {
+        return request.get('/nike/workouts').send({token: 'pepe'}).then(result => {
             expect(result.body).toEqual([ { works: true } ])
             expect(result.statusCode).toBe(200)
         })
     })
 
     test('nike get list of workouts returns error if empty request', () => {
-        return request.post('/nike/workouts').send().then(result => {
+        return request.get('/nike/workouts').send().then(result => {
             expect(result.statusCode).toBe(400)
         })
     })
 
     test('nike get list of workouts returns error if incorrect service rejects', () => {
         nike.workouts.mockImplementation(() => { return Promise.reject() })
-        return request.post('/nike/workouts').send({token: 'pepe'}).then(result => {
+        return request.get('/nike/workouts').send({token: 'pepe'}).then(result => {
             expect(nike.workouts.mock.calls.length).toBe(1)
             expect(result.statusCode).toBe(400)
         })
