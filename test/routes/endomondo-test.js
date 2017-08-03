@@ -4,16 +4,17 @@ jest.mock('endomondo-unofficial-api', () => ({
     workout : {
         set : jest.fn()
     }
-}));
+}))
 
 const endomondo = require('endomondo-unofficial-api')
-
+const exceptionMiddleware = require('../../src/helpers/exception-middleware')
 const bodyParser = require('body-parser')
 const app = require('express')()
+const request = require('supertest')(app)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/endomondo', require('../../src/routes/endomondo'));
-const request = require('supertest')(app)
+app.use('/endomondo', require('../../src/routes/endomondo'))
+app.use(exceptionMiddleware)
 
 describe('Test the endomondo endpoit', () => {
     beforeEach(() => {
@@ -50,7 +51,7 @@ describe('Test the endomondo endpoit', () => {
         endomondo.authenticate.mockImplementation(() => { return Promise.reject() })
         var result = await request.post('/endomondo/login').send({email:'pepe',password:'perez'})
         expect(endomondo.authenticate.mock.calls.length).toBe(1)
-        expect(result.statusCode).toBe(400)
+        expect(result.statusCode).toBe(500)
     })
 
     test('endomondo get list of workouts with correct parameters', async () => {
@@ -76,7 +77,7 @@ describe('Test the endomondo endpoit', () => {
         endomondo.workouts.mockImplementation(() => { return Promise.reject() })
         var result = await request.get('/endomondo/workouts').send({authToken: 'pepe'})
         expect(endomondo.workouts.mock.calls.length).toBe(1)
-        expect(result.statusCode).toBe(400)
+        expect(result.statusCode).toBe(500)
     })
 
     test('endomondo post calls workouts with correct parameters', async () => {
@@ -97,7 +98,7 @@ describe('Test the endomondo endpoit', () => {
         endomondo.workout.set.mockImplementation(() => { return Promise.reject() })
         var result = await request.post('/endomondo/workouts').send([{authToken: "pepe", userId : "pepe", duration: 10, time : 10}])
         expect(endomondo.workout.set.mock.calls.length).toBe(1)
-        expect(result.statusCode).toBe(400)
+        expect(result.statusCode).toBe(500)
     })
 
     test('endomondo post calls without authToken', async () => {
