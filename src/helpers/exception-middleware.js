@@ -1,5 +1,5 @@
-function exceptionMiddleware (err, req, res, next) {  
-    res.sendStatus(500)
+function exceptionMiddleware (err, req, res, next) {
+    res.sendStatus(err.status)
 }
 
 module.exports = exceptionMiddleware
