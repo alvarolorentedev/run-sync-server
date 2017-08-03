@@ -1,24 +1,20 @@
 const router = require('express').Router()
 const nike = require('nike-unofficial-api')
+const wrap = require('../helpers/exception-wrap')
+const AppError = require('../helpers/exception-custom')
 
-router.post('/login', function(req, res) {
+router.post('/login', wrap(async (req, res) => {
     if(!req.body.email || !req.body.password)
-        res.sendStatus(400)
-    nike.authenticate(req.body).then(
-        result => res.send(result)
-    ).catch(
-        err => res.sendStatus(400)
-    )
-})
+        throw new AppError('Wrong Parameter', 400)
+    let result = await nike.authenticate(req.body)
+    res.send(result)
+}))
 
-router.get('/workouts', function(req, res) {
+router.get('/workouts', wrap(async (req, res) => {
     if(!req.body.token)
-        res.sendStatus(400)
-    nike.workouts(req.body).then(
-        result => res.send(result)
-    ).catch(
-        err => res.sendStatus(400)
-    )
-})
+        throw new AppError('Wrong Parameter', 400)
+    let result = await nike.workouts(req.body)
+    res.send(result)
+}))
 
-module.exports = router;
+module.exports = router
