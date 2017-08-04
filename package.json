@@ -28,6 +28,11 @@
     "testMatch": [
       "**/test/**/*-test.js"
     ],
+    "coverageDirectory": "shippable/codecoverage",
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ],
     "testEnvironment": "node",
     "automock": false
   },

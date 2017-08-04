@@ -38,4 +38,6 @@ jspm_packages
 
 config_default.js
 
- .DS_Store
+#Other
+.DS_Store
+shippable
