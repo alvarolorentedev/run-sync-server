@@ -4,8 +4,8 @@ jest.mock('nike-unofficial-api', () => ({
 }))
 
 const nike = require('nike-unofficial-api')
-
 const bodyParser = require('body-parser')
+require('../../src/helpers/exception-handle')
 const app = require('express')()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
