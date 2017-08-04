@@ -808,6 +808,10 @@ expect-ct@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/expect-ct/-/expect-ct-0.1.0.tgz#52735678de18530890d8d7b95f0ac63640958094"
 
+express-exception-handler@kanekotic/express-exception-handler:
+  version "0.0.1"
+  resolved "https://codeload.github.com/kanekotic/express-exception-handler/tar.gz/9bdc3f5ddae04dd3c3b66745754638e20ef5aa89"
+
 express@^4.15.2:
   version "4.15.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.15.3.tgz#bab65d0f03aa80c358408972fc700f916944b662"

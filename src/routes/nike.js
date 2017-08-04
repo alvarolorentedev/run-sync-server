@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const nike = require('nike-unofficial-api')
-const AppError = require('../helpers/exception-custom')
+var AppError = require('express-exception-handler').exception
 
 router.post('/login', async (req, res) => {
     if(!req.body.email || !req.body.password)

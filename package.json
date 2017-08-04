@@ -45,7 +45,8 @@
     "helmet": "^3.5.0",
     "morgan": "^1.8.2",
     "nike-unofficial-api": "github:kanekotic/nike-unofficial-api",
-    "pino": "^4.2.4"
+    "pino": "^4.2.4",
+    "express-exception-handler": "kanekotic/express-exception-handler"
   },
   "devDependencies": {
     "jest": "^20.0.4",
