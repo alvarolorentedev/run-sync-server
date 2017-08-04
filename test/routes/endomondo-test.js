@@ -8,9 +8,9 @@ jest.mock('endomondo-unofficial-api', () => ({
 
 const endomondo = require('endomondo-unofficial-api')
 const bodyParser = require('body-parser')
+const app = require('express')()
 var exceptionHandler = require('express-exception-handler')
 exceptionHandler.handle()
-const app = require('express')()
 const request = require('supertest')(app)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
