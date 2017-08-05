@@ -24,18 +24,6 @@
     }
   ],
   "license": "ISC",
-  "jest": {
-    "testMatch": [
-      "**/test/**/*-test.js"
-    ],
-    "coverageDirectory": "shippable/codecoverage",
-    "coverageReporters": [
-      "text",
-      "cobertura"
-    ],
-    "testEnvironment": "node",
-    "automock": false
-  },
   "dependencies": {
     "body-parser": "^1.17.1",
     "cluster": "^0.7.7",
@@ -49,7 +37,24 @@
   },
   "devDependencies": {
     "jest": "^20.0.4",
+    "jest-junit": "^2.1.0",
     "nodemon": "^1.11.0",
     "supertest": "^3.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/test/**/*-test.js"
+    ],
+    "testResultsProcessor": "./node_modules/jest-junit",
+    "coverageDirectory": "shippable/codecoverage",
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ],
+    "testEnvironment": "node",
+    "automock": false
+  },
+  "jest-junit": {
+    "output": "shippable/testresults/test.xml"
   }
 }
