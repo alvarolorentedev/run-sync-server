@@ -2483,6 +2483,13 @@ rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
+runtastic-unofficial-api@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/runtastic-unofficial-api/-/runtastic-unofficial-api-0.0.11.tgz#2379fec2844a87cfeaacdf375ab9af5b62263b0c"
+  dependencies:
+    moment "^2.17.1"
+    request "^2.79.0"
+
 safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"

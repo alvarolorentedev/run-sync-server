@@ -33,7 +33,8 @@
     "express-exception-handler": "^0.0.2",
     "helmet": "^3.5.0",
     "morgan": "^1.8.2",
-    "nike-unofficial-api": "github:kanekotic/nike-unofficial-api"
+    "nike-unofficial-api": "github:kanekotic/nike-unofficial-api",
+    "runtastic-unofficial-api": "^0.0.11"
   },
   "devDependencies": {
     "jest": "^20.0.4",
