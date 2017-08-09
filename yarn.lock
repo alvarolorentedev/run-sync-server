@@ -802,9 +802,9 @@ expect-ct@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/expect-ct/-/expect-ct-0.1.0.tgz#52735678de18530890d8d7b95f0ac63640958094"
 
-express-exception-handler@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/express-exception-handler/-/express-exception-handler-0.0.2.tgz#ecbe452c03fe944db53903884d7c86fa62b864c8"
+express-exception-handler@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/express-exception-handler/-/express-exception-handler-0.0.4.tgz#ad3b18d62959f68af3a90bca42e23d4bfe4ed20f"
 
 express@^4.15.2:
   version "4.15.3"
