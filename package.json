@@ -1,6 +1,9 @@
 {
   "name": "run-sync-server",
   "version": "0.0.1",
+  "engines": {
+    "node": ">= 8.0.0"
+  },
   "description": "Server side for the run-sync project",
   "main": "src/server.js",
   "scripts": {
