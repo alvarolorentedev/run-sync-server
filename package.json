@@ -33,7 +33,7 @@
     "cors": "^2.8.4",
     "endomondo-unofficial-api": "^0.0.9",
     "express": "^4.15.2",
-    "express-exception-handler": "^0.0.4",
+    "express-exception-handler": "^0.0.7",
     "helmet": "^3.5.0",
     "morgan": "^1.8.2",
     "nike-unofficial-api": "github:kanekotic/nike-unofficial-api",

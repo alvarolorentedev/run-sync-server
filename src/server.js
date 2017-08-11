@@ -1,9 +1,12 @@
+
+const exceptionHandler = require('express-exception-handler')
 const express = require('express')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
-var exceptionHandler = require('express-exception-handler')
+exceptionHandler.handle()
+
 
 
 const port = process.env.PORT || 8080
