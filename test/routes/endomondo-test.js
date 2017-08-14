@@ -7,16 +7,7 @@ jest.mock('endomondo-unofficial-api', () => ({
 }))
 
 const endomondo = require('endomondo-unofficial-api')
-const bodyParser = require('body-parser')
-const app = require('express')()
-var exceptionHandler = require('express-exception-handler')
-exceptionHandler.handle()
-const request = require('supertest')(app)
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/endomondo', require('../../src/routes/endomondo'))
-app.use(exceptionHandler.middleware)
-
+const request = require('./route-initializer')('../../src/routes/endomondo','/endomondo')
 
 describe('Test the endomondo endpoit', () => {
     beforeEach(() => {

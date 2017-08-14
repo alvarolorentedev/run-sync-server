@@ -5,10 +5,9 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 
-function middlewareBinder(app){
+function middlewareBinder(app, isTest = false){
     exceptionHandler.handle()
     app.use(helmet())
-    app.use(morgan('combined'))
     app.use(bodyParser.json())
     app.use(exceptionHandler.middleware)
     app.use(cors({
@@ -16,6 +15,8 @@ function middlewareBinder(app){
         methods: ["GET", "POST"],
         allowedHeaders: ["Content-Type", "Authorization"]
     }))
+    if(!isTest)
+        app.use(morgan('combined'))
 }
 
 module.exports = middlewareBinder

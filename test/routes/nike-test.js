@@ -4,15 +4,7 @@ jest.mock('nike-unofficial-api', () => ({
 }))
 
 const nike = require('nike-unofficial-api')
-const bodyParser = require('body-parser')
-var exceptionHandler = require('express-exception-handler')
-exceptionHandler.handle()
-const app = require('express')()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/nike', require('../../src/routes/nike'))
-const request = require('supertest')(app)
-app.use(exceptionHandler.middleware)
+const request = require('./route-initializer')('../../src/routes/nike','/nike')
 
 describe('Test the nike endpoit', () => {
     beforeEach(() => {

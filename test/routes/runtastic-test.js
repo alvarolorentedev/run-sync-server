@@ -5,18 +5,8 @@ jest.mock('runtastic-unofficial-api', () => ({
         set : jest.fn()
     }
 }))
-
 const runtastic = require('runtastic-unofficial-api')
-const bodyParser = require('body-parser')
-const app = require('express')()
-var exceptionHandler = require('express-exception-handler')
-exceptionHandler.handle()
-const request = require('supertest')(app)
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/runtastic', require('../../src/routes/runtastic'))
-app.use(exceptionHandler.middleware)
-
+const request = require('./route-initializer')('../../src/routes/runtastic','/runtastic')
 
 describe('Test the runtastic endpoit', () => {
     beforeEach(() => {
